@@ -3,11 +3,18 @@ type Query {
     posts(query: String): [Post!]!
     comments: [Comment!]!
 }
+
 type Mutation {
     createUser(data: CreateUserInput!): User!
     createPost(data: CreatePostInput!): Post!
     createComment(data: CreateCommentInput!): Comment!
 }
+
+type Subscription {
+    count: Int!
+    comment(postId: ID!) : Comment!
+}
+
 input CreateUserInput {
     name: String!
     email: String!
@@ -21,17 +28,21 @@ input CreatePostInput {
     author: ID!
 }
 
+
 input CreateCommentInput {
     text: String!
     author: ID!
     post: ID!
 }
 
+
 type User {
     id: ID!
     name: String!
     email: String!
     age: Int
+    posts: [Post!]!
+    comments: [Comment!]!
 }
 
 type Post {
