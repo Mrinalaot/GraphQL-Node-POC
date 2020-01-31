@@ -1,6 +1,6 @@
 const Subscription = {
     comment : {
-        subscribe(parent,{ postId }, {db , pubsub}, info) {
+        subscribe(parent,{ postId }, {db , pubsub}) {
             const post = db.posts.filter(post => post.id === postId);
             if(!post) {
                 throw new Error("Post not found");

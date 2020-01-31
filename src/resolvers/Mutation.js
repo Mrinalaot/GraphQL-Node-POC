@@ -1,7 +1,7 @@
 import uuidv4 from 'uuid/v4'
 
 const Mutation = {
-    createUser(parent, args, { db }, info) {
+    createUser(parent, args, { db }) {
         const emailTaken = db.users.some((user) => user.email === args.data.email)
 
         if (emailTaken) {
@@ -17,7 +17,7 @@ const Mutation = {
 
         return user
     },
-    createPost(parent, args, { db }, info) {
+    createPost(parent, args, { db }) {
         const userExists = db.users.some((user) => user.id === args.data.author)
 
         if (!userExists) {
@@ -33,7 +33,7 @@ const Mutation = {
 
         return post
     },
-    createComment(parent, args, { db, pubsub}, info) {
+    createComment(parent, args, { db, pubsub}) {
         const userExists = db.users.some((user) => user.id === args.data.author)
         const postExists = db.posts.some((post) => post.id === args.data.post && post.published)
 
